@@ -52,7 +52,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle mr-5" data-toggle="dropdown" role="button"aria-haspopup="true"aria-expanded="false">Utilisateur</a>
               <div class="dropdown-menu ">
-                <a class="dropdown-item " href="#">Se Connecter</a>
+                <a class="dropdown-item " href="<?=WEB_ROUTE.'?controllers=security&view=connexion'?>">Se Connecter</a>
               </div>
             </li>
           </ul>
@@ -73,7 +73,7 @@
           sapiente?
         </p>
         <p class="lead">
-          <a class="btn btn-primary btn-lg" href="#" role="button"
+          <a class="btn btn-primary btn-lg" href="<?=WEB_ROUTE.'?controllers=security&view=inscription'?>" role="button"
             >Créer un compte</a
           >
         </p>

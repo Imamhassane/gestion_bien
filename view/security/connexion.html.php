@@ -1,7 +1,15 @@
+<?php
+if (isset($_SESSION['arrayError'])){
+    $arrayError = $_SESSION['arrayError'];
+    unset($_SESSION['arrayError']);
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>
+    </title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,7 +18,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">E-221</a>
       <button
@@ -33,9 +40,7 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Mes Réservations</a>
-          </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="#">A propos</a>
           </li>
@@ -71,55 +76,51 @@
     <!-- -----------------------------------------------------------NAV BAR -->
     <!-- -----------------------------------------------------------CONTAINER -->
     <div class="container">
-        <div class="row mt-5">
-            <h6 class="display-4">Détails du Bien</h6>
-        </div>
-      <div class="row">
-        <div class="col-sm-8 mb-4">
-          <div class="card">
-            <img
-              class="card-img-top"
-              src="https://source.unsplash.com/1080x720/?product"
-              alt="Annonce 1"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio saepe sit consequatur accusantium sed voluptatem exercitationem? Hic officia dicta ipsum numquam vero magnam velit quibusdam, repudiandae veniam error sint omnis voluptates quaerat consequatur labore, similique laborum mollitia dolor tempore fugiat excepturi quas expedita sit? Veritatis nostrum dolorem delectus temporibus voluptatum!
-              </p>
-              <hr />
-              <span class="float-left btn btn-sm btn-outline-danger disabled">4.000.000FCFA</span>
-              <span class="float-left btn btn-sm disabled">Ref: 67dh6dgo</span>
-              <span class="float-left btn btn-sm disabled">Depuis: 999H</span>
-              <a href="#" class="btn btn-sm btn-primary float-right">Réserver</a
-              >
+        <div class="row">
+            <div class="col-md-7 my-5  ml-auto mr-auto">
+        
+                <div class="card alert-secondary">
+        
+                    <form method="POST" action="<?=WEB_ROUTE?>"> 
+                    <input type="hidden" name="controllers" value="security">
+                    <input type="hidden" name="action" value="connexion">
+                        <div class="card-body ">
+                        <div class="text-center">
+                            <img src="user.png" width="50%" class="logo" />
+                            <h3 class="card-title ">Se connexion</h3>
+                            <p class="slogan">pour acceder aux fonctionnalités</p>
+                            <p class="slogan alert alert-danger">Login ou mot de passe invalide!</p>
+                        </div>
+ 
+                            <div class="form-group ">
+                                <label for="username" >Email</label>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Entrer votre email">
+                                <small class = "form-text text-danger">
+                                    <?= isset($arrayError['username']) ? $arrayError['username'] : '' ;?>
+                                </small> 
+                            </div>
+        
+                            <div class="form-group">
+                            <label for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="entrer votre mot de passe">
+                                <small class = "form-text text-danger">
+                                    <?= isset($arrayError['password']) ? $arrayError['password'] : '' ;?>
+                                </small> 
+                            </div>
+        
+                            <div class="card-foter text-right">
+                                <button type="submit" class="btn btn-primary btn-sm" style="width: 140px;">Connexion</button>
+                            </div>
+        
+                        </div>
+                    </form>
+        
+                </div>
+        
             </div>
-          </div>
         </div>
-        <!-- -------------------------------------------- -->
-        <div class="col">
-          <div class="card text-center" style="width: 18rem">
-            <img style="width: 8em; height:8em;" class="card-img-top rounded-circle align-self-center" src="https://api.randomuser.me/portraits/men/30.jpg" alt="Card image cap" />
-            <div class="card-body">
-              <h5 class="card-title">The Customer</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, nisi.
-              </p>
-            </div>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action bg-primary text-white"><i class="fas fa-mobile-alt mr-2"></i>77181 88 77</a>
-                <span class="list-group-item list-group-item-action">
-                    <a href="#"><i class="fab fa-facebook-square fa-2x text-primary mr-1"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp fa-2x text-success mr-1"></i></a>
-                    <a href="#"><i class="fab fa-twitter fa-2x text-primary mr-1"></i></a>
-                    <a href="#"><i class="fab fa-instagram fa-2x text-warning mr-1"></i></a>
-                    <a href="#"><i class="fab fa-youtube fa-2x text-danger"></i></a>
-                </span>
-              </div>
-          </div>
-        </div>
-      </div>
     </div>
+
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

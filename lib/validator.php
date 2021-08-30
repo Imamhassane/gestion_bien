@@ -20,7 +20,7 @@ function form_valid($arrayError):bool{
     return false;
 }
 
-function validation_login(string $valeur, string  $key, array &$arrayError){
+function validation_login(   $valeur, string  $key, array &$arrayError){
     if (est_vide($valeur)) {
         $arrayError[$key] = "le login est obligatoire";
     }elseif (!is_email($valeur)) {
@@ -40,49 +40,9 @@ function validation_champ( $valeur, string  $key,  &$arrayError){
         $arrayError[$key] = "Ce champ est obligatoire";
     }   
 }
-function validation_champs(  $valeur, string  $key,  &$arrayError){
-    if (est_vide($valeur)) {
-        $arrayError[$key] = "Ce champ est obligatoire";
-    }elseif(!is_numeric($valeur)){
-        $arrayError[$key] = "Ce champ doit être numérique";
 
-    }
-}
-function type_reponse( $valeur, string  $key,  &$arrayError){
-    if (est_vide($valeur)) {
-        $arrayError[$key] = "Veuillez donner le type de réponse";
-    }   
-}
-function reponse( $valeur, string  $key,  &$arrayError){
-    if(est_vide($valeur)) {
-        $arrayError[$key] = "Veuillez donner la réponse";
-    }   
-}
 
-function nombrePageTotal($array, $nombreElement): int {
-    $nombrePage = 0;
-    $longueurArray = count($array);
-    if ($longueurArray % $nombreElement == 0) {
-        $nombrePage = $longueurArray / $nombreElement;
-    } else {
-        $nombrePage = ($longueurArray / $nombreElement) + 1;
-    }
-    return $nombrePage;
-}
 
-function get_element_to_display($array,  $page, int $nombreElement): array {
-$arrayElement = [];
-$indiceDepart = ($page*$nombreElement) - $nombreElement;
-$limitElement = $page * $nombreElement;
-for ($i = $indiceDepart; $i < $limitElement; $i++) {
-    if ($i >= count($array)) {
-        return $arrayElement;
-    } else {
-        $arrayElement[] = $array[$i];
-    }
-}
-return $arrayElement;
-}
 
 
 
