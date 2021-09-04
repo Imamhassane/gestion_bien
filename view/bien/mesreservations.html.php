@@ -7,31 +7,22 @@
     <!-- -----------------------------------------------------------NAV BAR -->
     <div class="">
       <div class="jumbotron text-center p-3">
-        <h1 class="display-3">Réservez un Bien</h1>
+        <h1 class="display-3">Suivez vos reservations</h1>
         <p class="lead">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit
           culpa eaque ad blanditiis voluptatem. Iste dicta atque quas temporibus
           deserunt!
         </p>
         <hr class="my-4" />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-          sapiente?
-        </p>
-        <?php if (!est_connect()): ?>
 
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" href="<?=WEB_ROUTE.'?controllers=security&view=inscription'?>" role="button"
-            >Créer un compte</a
-          >
-        </p>
-        <?php endif ?>
+
       </div>
     </div>
     <!-- -----------------------------------------------------------CONTAINER -->
     <div class="container">
       <div class="row">
-      <?php foreach ($biens as $bien): ?>
+  
+      <?php foreach ($reservation as $res): ?>
 
         <div class="col-sm-4 mb-4">
           <div class="card" style="width: 22rem">
@@ -41,28 +32,16 @@
               alt="Annonce 1"
             />
             <div class="card-body">
-              <h5 class="card-title">
-                  <button class="btn"><span class="badge badge-success"><?= $bien['type_bien']?></span></button>
-                  <button class="btn"><span class="badge badge-info"><?= $bien['prix_bien'].''.'CFA'?></span></button>
+            <h5 class="card-title">
+                  <button class="btn"><span class="badge badge-success"><?= $res['type_bien']?></span></button>
+                  <button class="btn"><span class="badge badge-info"><?= $res['prix_bien'].' '.'CFA'?></span></button>
 
               </h5>
               <hr />
-              <?php if (!est_connect()): ?>
-                <a href="<?=WEB_ROUTE.'?controllers=bien&view=detail&id_bien='.$bien['id_bien']?>" class="btn btn-sm btn-outline-success float-right">Détails</a>
-               <?php endif ?> 
 
-                <?php if (est_client()): ?>
-                <a href="<?=WEB_ROUTE.'?controllers=reservation&view=reservation.client&id_bien='.$bien['id_bien']?>" class="btn btn-sm btn-outline-info float-right ml-3">Reserver</a>
-                <a href="<?=WEB_ROUTE.'?controllers=bien&view=detail&id_bien='.$bien['id_bien']?>" class="btn btn-sm btn-outline-success float-right">Détails</a>
-               <?php endif ?>        
-
-               
-                <?php if (est_gestionnaire()): ?>
-                  <a href="#" class="btn btn-sm btn-outline-info float-right ml-3">Modifier</a>
-                  <a href="<?=WEB_ROUTE.'?controllers=bien&view=detail&id_bien='.$bien['id_bien']?>" class="btn btn-sm btn-outline-danger float-right">Supprimer</a>
-                <?php endif ?>        
-
-                </div>
+              <a href="#" class="btn btn-sm btn-outline-info float-right ml-3"><?= $res['etat_reservation']?></a>
+              <a href="<?=WEB_ROUTE.'?controllers=bien&view=detail&id_bien='.$bien['id_bien']?>" class="btn btn-sm btn-outline-success float-right">réserver le <?= $res['date_reservation']?></a>
+            </div>
           </div>
         </div>
         <?php endforeach ?>        

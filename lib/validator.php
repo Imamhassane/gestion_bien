@@ -20,11 +20,11 @@ function form_valid($arrayError):bool{
     return false;
 }
 
-function validation_login(   $valeur, string  $key, array &$arrayError){
+function validation_login( $valeur, string  $key, array &$arrayError){
     if (est_vide($valeur)) {
         $arrayError[$key] = "le login est obligatoire";
     }elseif (!is_email($valeur)) {
-        $arrayError[$key] = "le login doit être un email (exemple123@gmail.com)";
+        $arrayError[$key] = "Saisir un email ";
     }
         
 }

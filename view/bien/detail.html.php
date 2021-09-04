@@ -1,73 +1,10 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php 
+  require ( ROUTE_DIR . 'view/inc/header.html.php' );
+  require ( ROUTE_DIR . 'view/inc/menu.html.php' );
+  require ( ROUTE_DIR . 'view/inc/footer.html.php' );
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
+ ?>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">E-221</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarColor01"
-        aria-controls="navbarColor01"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="<?=WEB_ROUTE.'?controllers=bien&view=catalogue'?>"
-              >Accueil
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Mes Réservations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">A propos</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="text"
-            placeholder="Rechercher un article..."
-          />
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-            Rechercher
-          </button>
-        </form>
-        <ul class="navbar-nav mr-o ml-4">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle mr-5"
-              data-toggle="dropdown"
-              href="#"
-              role="button"
-              aria-haspopup="true"
-              aria-expanded="false"
-              >Utilisateur</a
-            >
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="<?=WEB_ROUTE.'?controllers=security&view=connexion'?>">Se Connecter</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
     <!-- -----------------------------------------------------------NAV BAR -->
     <!-- -----------------------------------------------------------CONTAINER -->
     <div class="container">
@@ -88,10 +25,11 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio saepe sit consequatur accusantium sed voluptatem exercitationem? Hic officia dicta ipsum numquam vero magnam velit quibusdam, repudiandae veniam error sint omnis voluptates quaerat consequatur labore, similique laborum mollitia dolor tempore fugiat excepturi quas expedita sit? Veritatis nostrum dolorem delectus temporibus voluptatum!
               </p>
               <hr />
-              <span class="float-left btn btn-sm btn-outline-danger disabled">4.000.000FCFA</span>
-              <span class="float-left btn btn-sm disabled">Ref: 67dh6dgo</span>
+              <span class="float-left btn btn-sm btn-outline-danger disabled"><?= $bien['prix_bien']?></span>
+
+              <span class="float-left btn btn-sm disabled">Ref:<?=$bien['reference_bien']?></span>
               <span class="float-left btn btn-sm disabled">Depuis: 999H</span>
-              <a href="#" class="btn btn-sm btn-primary float-right">Réserver</a
+              <a href="#" class="btn btn-sm btn-primary float-right"><?=$bien['etat_bien']?></a
               >
             </div>
           </div>
@@ -120,11 +58,3 @@
         </div>
       </div>
     </div>
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>

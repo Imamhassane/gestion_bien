@@ -5,48 +5,94 @@ if ( $_SERVER ['REQUEST_METHOD' ]== 'GET' ) {
         require ( ROUTE_DIR . 'view/security/connexion.html.php' );
        }elseif ( $_GET [ 'view' ]== 'inscription' ) {
         require ( ROUTE_DIR . 'view/security/inscription.html.php' );
-       }
+       }elseif ( $_GET [ 'view' ]== 'deconnexion' ) {
+            deconnexion();
+        }
     }else{
         require ( ROUTE_DIR . 'view/bien/catalogue.html.php' );
     }
 }elseif ($_SERVER ['REQUEST_METHOD' ]== 'POST') {
     if ( isset ( $_POST [ 'action' ])) {
         if ( $_POST [ 'action' ]== 'connexion' ) {
-            connexion ( $_POST [ 'username' ], $_POST [ 'password' ]);
+            connexion ( $_POST [ 'login' ], $_POST [ 'password' ]);
         }elseif ($_POST['action']=='inscription') {
- 
-            inscription($_POST);
+            unset($_POST['controllers']);
+            unset($_POST['action']);
+            unset($data['password_confirm']);
+            inscription($_POST); 
+            
         }
     }
+
 }
-function connexion(string $username,string $password):void{
+function connexion(string $login,string $password):void{
+
     $arrayError=array();
-     validation_login($username,'username',$arrayError);
+    validation_login($login,'login',$arrayError);
      validation_password($password,'password',$arrayError);
 
      if (form_valid($arrayError)) {
-        echo 'reussi';
+        $user = find_user_by_login_password($login , $password);
 
+        if (count($user)==0) {
+          $arrayError['erreurConnexion']="login ou password incorrect ";
+          $_SESSION['arrayError']= $arrayError;
+          header('location:'.WEB_ROUTE.'?controllers=security&view=connexion');
+        }else{
+            
+            $_SESSION ['userConnect'] = $user;
+            if ($user[0]['nom_role']=='ROLE_CLIENT') {
+                header('location:'.WEB_ROUTE);
+            }elseif ($user[0]['nom_role']=='ROLE_GESTIONNAIRE') {
+                header('location:'.WEB_ROUTE.'?controllers=reservation&view=liste.reservation');
+            }
+
+        }
      }else {
          $_SESSION['arrayError']=$arrayError;
          header('location:'.WEB_ROUTE.'?controllers=security&view=connexion');
      }
 }
-function inscription(array $data ):void{
-        $arrayError=array();
-        extract($data);
-        validation_login($login,'username',$arrayError);
+
+
+function inscription(array $user):void{
+  
+    
+    $arrayError=array();
+    extract($user);
+        validation_login($login,'login',$arrayError);
+        if(login_exist($login)){
+            $arrayError['login'] = 'Ce login existe déjà';
+            $_SESSION['arrayError']=$arrayError;
+            header('location:'.WEB_ROUTE.'?controllers=security&view=inscription');
+      }
         validation_password($password,'password',$arrayError);
         validation_champ($prenom,'prenom',$arrayError);
         validation_champ($nom,'nom',$arrayError);
-        if ($password != $confirmpassword){
-            $arrayError['confirmpassword'] = 'Les deux password ne sont pas identiques';
+        if ($password != $password_confirm){
+            $arrayError['password_confirm'] = 'Les deux password ne sont pas identiques';
         }               
         if (form_valid($arrayError)) {
-             echo 'test';
+
+               if (est_gestionnaire()) {
+                   require(ROUTE_DIR.'view/reservation/liste.reservation.html.php' );
+                }else {
+                    header('location:'.WEB_ROUTE.'?controllers=security&view=connexion');
+
+                }  
+                ajout_user($user);         
+
         }else{
+          
                 $_SESSION['arrayError']=$arrayError;
                 header('location:'.WEB_ROUTE.'?controllers=security&view=inscription');
             }
+            
+         
+}
+function deconnexion():void{
+    unset($_SESSION['userConnect']);
+    header('location:'.WEB_ROUTE.'?controllers=controllers&view=catalogue');
+
 }
 ?>

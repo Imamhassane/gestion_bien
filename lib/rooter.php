@@ -6,10 +6,13 @@ if (isset($_REQUEST['controllers'])){
         require_once(ROUTE_DIR.'controllers/reservation.controllers.php');
     }elseif($_REQUEST['controllers']=='bien'){
         require_once(ROUTE_DIR.'controllers/bien.controllers.php');
+    }elseif($_REQUEST['controllers']=='controllers'){
+        require_once(ROUTE_DIR.'controllers/controllers.php');
     }else{
         require_once(ROUTE_DIR.'view/bien/catalogue.html.php');
     }
 }else{
-    require_once(ROUTE_DIR.'view/bien/catalogue.html.php');
+    require_once(ROUTE_DIR.'controllers/bien.controllers.php');
+
 }
 ?>
